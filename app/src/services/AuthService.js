@@ -4,6 +4,10 @@ import {
     loginConfirmedAction,
     logout,
 } from '../store/actions/AuthActions';
+import apiClient from '../apiClient';
+
+
+
 
 export function signUp(email, password) {
     //axios call
@@ -14,7 +18,7 @@ export function signUp(email, password) {
         returnSecureToken: true,
     };
 
-    return axios.post(
+    return apiClient.post(
         `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
         postData,
     );
@@ -24,11 +28,11 @@ export function login(email, password) {
     const postData = {
         email,
         password,
-        returnSecureToken: true,
+        app_name: "trunkz",
     };
 
-    return axios.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
+    return apiClient.post(
+        `/user/requestLoginToken`,
         postData,
     );
 }
@@ -57,7 +61,7 @@ export function formatError(errorResponse) {
 
 export function saveTokenInLocalStorage(tokenDetails) {
     tokenDetails.expireDate = new Date(
-        new Date().getTime() + tokenDetails.expiresIn * 1000,
+        new Date().getTime() + tokenDetails.expire_in_timestamp * 1000,
     );
     localStorage.setItem('userDetails', JSON.stringify(tokenDetails));
 }

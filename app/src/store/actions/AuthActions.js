@@ -45,21 +45,27 @@ export function loginAction(email, password, history) {
     return (dispatch) => {
         login(email, password)
             .then((response) => {
-                saveTokenInLocalStorage(response.data);
+                console.log("login response ", response);
+                var token = response.data.token;
+                saveTokenInLocalStorage(token);
+                var authToken = token.auth;
+                var expireIn = token.expire_in_timestamp;
+                var user = response.data.user;
                 runLogoutTimer(
                     dispatch,
-                    response.data.expiresIn * 1000,
+                    expireIn * 1000, // convert to milliseconds
                     history,
                 );
-                dispatch(loginConfirmedAction(response.data));
+                dispatch(loginConfirmedAction(user));
 				history.push('/dashboard');
-				//window.location.reload();
+				window.location.reload();
                 
-				//history.pushState('/index');
+				history.pushState('/index');
                 
             })
             .catch((error) => {
-                const errorMessage = formatError(error.response.data);
+                //const errorMessage = formatError(message);
+                var errorMessage = "invalid credentials";
                 dispatch(loginFailedAction(errorMessage));
             });
     };
@@ -72,10 +78,10 @@ export function loginFailedAction(data) {
     };
 }
 
-export function loginConfirmedAction(data) {
+export function loginConfirmedAction(user) {
     return {
         type: LOGIN_CONFIRMED_ACTION,
-        payload: data,
+        payload: user,
     };
 }
 
