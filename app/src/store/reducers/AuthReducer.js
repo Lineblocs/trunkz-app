@@ -31,6 +31,7 @@ export function AuthReducer(state = initialState, action) {
         };
     }
     if (action.type === LOGIN_CONFIRMED_ACTION) {
+        console.log("login confirmed ", action);
         return {
             ...state,
             auth: action.payload,

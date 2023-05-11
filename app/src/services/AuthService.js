@@ -1,4 +1,3 @@
-import axios from 'axios';
 import swal from "sweetalert";
 import {
     loginConfirmedAction,
@@ -60,9 +59,6 @@ export function formatError(errorResponse) {
 }
 
 export function saveTokenInLocalStorage(tokenDetails) {
-    tokenDetails.expireDate = new Date(
-        new Date().getTime() + tokenDetails.expire_in_timestamp * 1000,
-    );
     localStorage.setItem('userDetails', JSON.stringify(tokenDetails));
 }
 
@@ -73,6 +69,7 @@ export function runLogoutTimer(dispatch, timer, history) {
 }
 
 export function checkAutoLogin(dispatch, history) {
+    console.log("processing login ", arguments);
     const tokenDetailsString = localStorage.getItem('userDetails');
     let tokenDetails = '';
     if (!tokenDetailsString) {
@@ -81,6 +78,7 @@ export function checkAutoLogin(dispatch, history) {
     }
 
     tokenDetails = JSON.parse(tokenDetailsString);
+    /*
     let expireDate = new Date(tokenDetails.expireDate);
     let todaysDate = new Date();
 
@@ -88,8 +86,9 @@ export function checkAutoLogin(dispatch, history) {
         dispatch(logout(history));
         return;
     }
-    dispatch(loginConfirmedAction(tokenDetails));
+    */
+    //const timer = expireDate.getTime() - todaysDate.getTime();
+    //runLogoutTimer(dispatch, timer, history);
 
-    const timer = expireDate.getTime() - todaysDate.getTime();
-    runLogoutTimer(dispatch, timer, history);
+    dispatch(loginConfirmedAction(tokenDetails));
 }

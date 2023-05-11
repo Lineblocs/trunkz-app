@@ -19,6 +19,10 @@ import Statistics from "./components/Dashboard/Statistics/Statistics";
 import SearchJobs from "./components/Dashboard/SearchJobs/SearchJobs";
 import Task from './components/Dashboard/Task';
 
+import ListTrunks from './components/Trunks/List/';
+import CreateTrunk from './components/Trunks/Create/';
+import Settings from './components/Settings/';
+
 /// App
 import AppProfile from './components/AppsMenu/AppProfile/AppProfile'
 import PostDetails from './components/AppsMenu/AppProfile/PostDetails'
@@ -209,6 +213,11 @@ const Markup = () => {
     { url: 'page-error-500', component: Error500 },
     { url: 'page-error-503', component: Error503 },
     { url: 'todo', component: Todo },
+
+
+    { url: 'trunks', component: ListTrunks },
+    { url: 'trunks/create', component: CreateTrunk },
+    { url: 'settings', component: Settings },
   ]
 
   return (

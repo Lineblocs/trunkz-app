@@ -46,9 +46,10 @@ export function loginAction(email, password, history) {
         login(email, password)
             .then((response) => {
                 console.log("login response ", response);
-                var token = response.data.token;
-                saveTokenInLocalStorage(token);
-                var authToken = token.auth;
+                var responseData = response.data;
+                var token = responseData.token;
+                saveTokenInLocalStorage(responseData);
+                //var authToken = token.auth;
                 var expireIn = token.expire_in_timestamp;
                 var user = response.data.user;
                 runLogoutTimer(
@@ -56,11 +57,11 @@ export function loginAction(email, password, history) {
                     expireIn * 1000, // convert to milliseconds
                     history,
                 );
-                dispatch(loginConfirmedAction(user));
+                dispatch(loginConfirmedAction({ token: token, userDetails: responseData }));
 				history.push('/dashboard');
 				window.location.reload();
                 
-				history.pushState('/index');
+				//history.pushState('/index');
                 
             })
             .catch((error) => {
