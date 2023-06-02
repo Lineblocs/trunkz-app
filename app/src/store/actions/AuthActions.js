@@ -52,11 +52,13 @@ export function loginAction(email, password, history) {
                 //var authToken = token.auth;
                 var expireIn = token.expire_in_timestamp;
                 var user = response.data.user;
+                /*
                 runLogoutTimer(
                     dispatch,
                     expireIn * 1000, // convert to milliseconds
                     history,
                 );
+                */
                 dispatch(loginConfirmedAction({ token: token, userDetails: responseData }));
 				history.push('/dashboard');
 				window.location.reload();
