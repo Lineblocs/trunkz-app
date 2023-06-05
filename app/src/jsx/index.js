@@ -21,6 +21,7 @@ import Task from './components/Dashboard/Task';
 
 import ListTrunks from './components/Trunks/List/';
 import CreateTrunk from './components/Trunks/Create/';
+import CreateNewTrunks from './components/Trunks/CreateNew';
 import Settings from './components/Settings/';
 
 /// App
@@ -216,6 +217,7 @@ const Markup = () => {
 
 
     { url: 'trunks', component: ListTrunks },
+    { url: 'trunks/create-trunk', component: CreateNewTrunks },
     { url: 'trunks/create', component: CreateTrunk },
     { url: 'settings', component: Settings },
   ]

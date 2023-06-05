@@ -7,21 +7,26 @@ const ListTrunks = () => {
       <div className="h-80">
          <div className="d-flex flex-wrap mb-4 row">
             <div className="col-xl-3 col-lg-4 mb-2">
-               <h6 className="text-black fs-16 font-w600 mb-1">
+               {/* <h6 className="text-black fs-16 font-w600 mb-1">
                   45 trunks
-               </h6>
+               </h6> */}
             </div>
             <div className="col-xl-9 col-lg-8 d-flex flex-wrap">
             </div>
          </div>
-         <div className="row">
+         <div className="row flex-wrap bg-white rounded py-3 px-md-3 mb-4 create-trunk-list">
+            No trunks listed
+            <a class="btn btn-primary btn-rounded mb-2" href="/react/demo/trunks/create-trunk">Create New Trunk</a>
+         </div>
+         {/* <div className="row">
             <div className="col-xl-12">
                <div className="table-responsive">
                   <div
                      id="example5_wrapper"
                      className="dataTables_wrapper no-footer"
                   >
-                     <table
+
+                     {/* <table
                         className="table display mb-4 dataTablesCard card-table dataTable no-footer"
                         id="example5"
                         role="grid"
@@ -161,7 +166,7 @@ const ListTrunks = () => {
                               <td>FREELANCE</td>
                            </tr>
                         </tbody>
-                     </table>
+                     </table> 
                      <div className="d-flex align-items-center justify-content-between pb-2">
                         <div
                            className="dataTables_info"
@@ -202,11 +207,11 @@ const ListTrunks = () => {
                               Next
                            </Link>
                         </div>
-                     </div>
+                     </div> 
                   </div>
                </div>
             </div>
-         </div>
+         </div> */}
       </div>
    );
 };
