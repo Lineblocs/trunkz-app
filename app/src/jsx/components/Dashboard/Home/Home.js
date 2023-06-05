@@ -4,14 +4,26 @@ import { Link } from "react-router-dom";
 //** Import Image */
 import profileImg from "../../../../images/avatar/1.jpg";
 import { Dropdown } from "react-bootstrap";
+import { useEffect } from "react";
 
 //import ApexChart from "../../charts/apexcharts/ApexChart";
 import JobSlide from "./JobSlide";
 import { FeaturedSlide } from "./FeaturedSlide";
 import DualLine3 from "../../charts/Chartjs/dualLine3";
+import { useSelector,useDispatch } from "react-redux";
+import { setData } from "../../../../store/reducers/AppReducer";
+import ApiServices from "../../../../apiServices/ApiServices";
 
 const Home = () => {
-   console.log("rendering Home")
+   const dispatch = useDispatch();
+   const reduxData = useSelector((state) => state.app.data)
+
+   useEffect(() => {
+      ApiServices.getRandomUser().then((data) => {
+         dispatch(setData(data))
+      })
+   }, [])
+   
    return (
       <Fragment>
          <div className="row">
@@ -126,12 +138,12 @@ const Home = () => {
                         <div className="card-body  text-center border-bottom profile-bx">
                            <div className="profile-image mb-4">
                               <img
-                                 src={profileImg}
+                                 src={reduxData ? reduxData.picture.medium : profileImg}
                                  className="rounded-circle"
                                  alt=""
                               />
                            </div>
-                           <h4 className="fs-22 text-black mb-1">Username</h4>
+                           <h4 className="fs-22 text-black mb-1">{ reduxData ? reduxData.name.first + " " +reduxData.name.last  : 'Username'}</h4>
                            <div className="row">
                               <div className="col-4 p-0">
                                  <div className="d-inline-block mb-2 relative donut-chart-sale">
