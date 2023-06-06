@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Tab, Nav, OverlayTrigger, Tooltip } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
+import { getDidNumbers, createTrunk } from "../../../../services/TrunksService";
 
 const CreateNewTrunks = () => {
     const initialTabData = [
@@ -40,6 +41,36 @@ const CreateNewTrunks = () => {
         const newTabData = [...tabData];
         newTabData[tabIndex].toggleSwitch = event.target.checked;
         setTabData(newTabData);
+    };
+
+    useEffect(() => {
+        getDidNumbers();  
+    }, []);  
+    
+    const handleSubmit = async () => {
+        let postData = {};
+        tabData.forEach((tab, index) => {
+            if (tab.inputs) {
+                const inputs = tab.inputs.reduce((obj, input) => {
+                    if (input.placeholder.toLowerCase() === 'sip uri') {
+                        obj['orig_endpoints'] = [{sip_uri: input.value}];
+                    }
+                    if (input.placeholder.toLowerCase() === 'recovery sip uri') {
+                        obj['orig_settings'] = [{recovery_sip_uri: input.value}];
+                    }
+                    if (input.placeholder.toLowerCase() === 'termination sip uri') {
+                        obj['term_settings'] = [{sip_addr: input.value}];
+                    }
+                    return {...obj, [input.placeholder.toLowerCase().replace(' ', '_')]: input.value};
+                }, {});
+                postData = {...postData, ...inputs};
+            }
+            postData['did_numbers'] = []; //pending---> getDidNumbers api call fetch `checked` data
+            if (index === 0 && tab.hasOwnProperty('toggleSwitch')) postData['record'] = tab.toggleSwitch || false;
+            postData['term_acls'] = [];
+            postData['term_creds'] = [];
+        });
+        createTrunk(postData);
     };
 
     return (
@@ -99,7 +130,7 @@ const CreateNewTrunks = () => {
                             ))}
                         </Tab.Content>
                     </Tab.Container>
-                    <a className="btn btn-primary btn-rounded mb-2" href="/react/demo/profile">Save</a>
+                    <a className="btn btn-primary btn-rounded mb-2" onClick={handleSubmit}>Save</a>
                     <a className="btn btn-dark light btn-rounded mr-3 mb-2 mx-2">Cancel</a>
                 </div>
             </div>

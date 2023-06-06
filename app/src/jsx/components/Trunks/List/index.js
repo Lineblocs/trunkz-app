@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Dropdown } from "react-bootstrap";
+import { getTrunks } from "../../../../services/TrunksService";
 
 const ListTrunks = () => {
+
+   useEffect(async () => {
+      console.log('useEffect');
+      getTrunks();
+   }, []);
+
    return (
       <div className="h-80">
          <div className="d-flex flex-wrap mb-4 row">
@@ -16,7 +23,9 @@ const ListTrunks = () => {
          </div>
          <div className="row flex-wrap bg-white rounded py-3 px-md-3 mb-4 create-trunk-list">
             No trunks listed
-            <a class="btn btn-primary btn-rounded mb-2" href="/react/demo/trunks/create-trunk">Create New Trunk</a>
+            <Link to="/trunks/create-trunk" className="btn btn-primary btn-rounded mr-2 mb-2">
+               Create New Trunk
+            </Link>
          </div>
          {/* <div className="row">
             <div className="col-xl-12">
