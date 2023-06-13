@@ -8,17 +8,37 @@ import apiClient from '../apiClient';
 
 
 
-export function signUp(email, password) {
+export function signUp(apiParam) {
     //axios call
+    const postData = apiParam;
 
+    return apiClient.post(
+        `/createUser`,
+        postData,
+    );
+}
+
+export function forgotPassword(email) {
+    //axios call
     const postData = {
-        email,
-        password,
-        returnSecureToken: true,
+        email: email
     };
 
     return apiClient.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
+        `/forgotPassword`,
+        postData,
+    );
+}
+
+export function ResetPassword(email,password) {
+    //axios call
+    const postData = {
+        email: email,
+        new_password: password
+    };
+
+    return apiClient.post(
+        `/resetPassword`,
         postData,
     );
 }
