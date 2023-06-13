@@ -158,11 +158,14 @@ function Register(props) {
                                         <h2 className='text-center mb-3 text-white'>OTP Verification</h2>
                                         <h6 className='text-center mb-4 text-white'>We've Sent a OTP Verification Code to Your Email</h6>
                                         <form>
-                                        <div className='form-group'>
-                                            <input type='text' className="form-control"
-												placeholder='Enter Verification Code'
-                                            />
-                                        </div>
+                                            <div className='form-group'>
+                                                <input type='text' className="form-control"
+                                                    placeholder='Enter Verification Code'
+                                                />
+                                            </div>
+                                            <div className='text-center mt-4'>
+                                                <input type='submit' className='btn bg-white text-primary btn-block'/>
+                                            </div>
                                         </form>
                                     </>}
                                 </div>
