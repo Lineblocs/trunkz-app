@@ -21,13 +21,13 @@ export function signupAction(apiParam, history) {
     return (dispatch) => {
         signUp(apiParam)
         .then((response) => {
-            saveTokenInLocalStorage(response.data);
-            runLogoutTimer(
-                dispatch,
-                response.data.expiresIn * 1000,
-                history,
-            );
-            dispatch(confirmedSignupAction(response.data));
+            // saveTokenInLocalStorage(response.data);
+            // runLogoutTimer(
+            //     dispatch,
+            //     response.data.expiresIn * 1000,
+            //     history,
+            // );
+            dispatch(confirmedSignupAction(response.message));
             history.push("/thankyou");
         })
         .catch((error) => {
@@ -40,8 +40,8 @@ export function ResetPasswordAction(email,password, history) {
     return (dispatch) => {
         ResetPassword(email,password)
         .then((response) => {
-            dispatch(confirmedResetPasswordAction(response.data));
-            history.push("/login");
+            dispatch(confirmedResetPasswordAction(response.message));
+            // history.push("/login");
         })
     };
 }
@@ -50,7 +50,8 @@ export function ForgotPasswordAction(email){
     return (dispatch) => {
         forgotPassword(email)
         .then((response) =>{
-            dispatch(confirmedPasswordAction(response.data));
+            console.log(" => 'response action': ", response.message);
+            dispatch(confirmedPasswordAction(response.message));
         })
     }
 }   

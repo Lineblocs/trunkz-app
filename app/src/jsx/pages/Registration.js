@@ -82,7 +82,7 @@ function Register(props) {
                                         </div>
                                     )}
                                     {props.successMessage && (
-                                        <div className='bg-green-300 text-danger text-green-900  p-1 my-2'>
+                                        <div className='bg-green-300 text-success text-green-900  p-1 my-2'>
                                             {props.successMessage}
                                         </div>
                                     )}
@@ -95,7 +95,7 @@ function Register(props) {
                                                  value={firstName}   
                                                  onChange={(e) => setFirstName(e.target.value)} 
                                             />
-                                             {errors.firstName && <div className="text-danger fs-12">{errors.firstName}</div>}
+                                             {errors.firstName && <div className="text-danger fs-12 mt-1">{errors.firstName}</div>}
                                         </div>
                                         <div className='form-group'>
                                             <label className='mb-1 text-white'>
@@ -105,7 +105,7 @@ function Register(props) {
                                                  value={lastName}   
                                                  onChange={(e) => setLastName(e.target.value)} 
                                             />
-                                             {errors.lastName && <div className="text-danger fs-12">{errors.lastName}</div>}
+                                             {errors.lastName && <div className="text-danger fs-12 mt-1">{errors.lastName}</div>}
                                         </div>
                                        
                                         <div className='form-group'>
@@ -116,7 +116,7 @@ function Register(props) {
                                                 value={phone}   
                                                 onChange={(e) => setPhone(e.target.value)} 
                                             />
-                                            {errors.phone && <div className="text-danger fs-12">{errors.phone}</div>}
+                                            {errors.phone && <div className="text-danger fs-12 mt-1">{errors.phone}</div>}
                                         </div>
                                         <div className='form-group'>
                                             <label className='mb-1 text-white'>
@@ -127,7 +127,7 @@ function Register(props) {
 												placeholder='email'
                                                 onChange={(e) => setEmail(e.target.value)}
                                             />
-                                            {errors.email && <div className="text-danger fs-12">{errors.email}</div>}
+                                            {errors.email && <div className="text-danger fs-12 mt-1">{errors.email}</div>}
                                         </div>
                                         <div className='form-group'>
                                             <label className='mb-1 text-white'>
@@ -141,7 +141,7 @@ function Register(props) {
 												placeholder='password'
                                             />
                                         </div>
-                                        {errors.password && <div className="text-danger fs-12">{errors.password}</div>}
+                                        {errors.password && <div className="text-danger fs-12 mt-1">{errors.password}</div>}
                                         <div className='text-center mt-4'>
                                             <input type='submit' className='btn bg-white text-primary btn-block'/>
                                         </div>

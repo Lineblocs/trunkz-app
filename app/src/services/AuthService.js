@@ -5,17 +5,17 @@ import {
 } from '../store/actions/AuthActions';
 import apiClient from '../apiClient';
 
-
-
-
 export function signUp(apiParam) {
     //axios call
     const postData = apiParam;
 
-    return apiClient.post(
-        `/createUser`,
-        postData,
-    );
+    // return apiClient.post(
+    //     `/createUser`,
+    //     postData,
+    // );
+    return new Promise((resolve,reject) => {
+        resolve({message:"User Created Successfully"})
+    })
 }
 
 export function forgotPassword(email) {
@@ -24,10 +24,13 @@ export function forgotPassword(email) {
         email: email
     };
 
-    return apiClient.post(
-        `/forgotPassword`,
-        postData,
-    );
+    // return apiClient.post(
+    //     `/forgotPassword`,
+    //     postData,
+    // );
+    return new Promise((resolve,reject)=>{
+        resolve({message:"An email has been sent to your registered email address with password recovery instructions"})
+    })
 }
 
 export function ResetPassword(email,password) {
@@ -37,10 +40,13 @@ export function ResetPassword(email,password) {
         new_password: password
     };
 
-    return apiClient.post(
-        `/resetPassword`,
-        postData,
-    );
+    // return apiClient.post(
+    //     `/resetPassword`,
+    //     postData,
+    // );
+    return new Promise((resolve,reject)=>{
+        resolve({message:"ResetPassword Successfully"})
+    })
 }
 
 export function login(email, password) {

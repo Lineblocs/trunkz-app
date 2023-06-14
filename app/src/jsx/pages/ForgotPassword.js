@@ -5,7 +5,7 @@ import logo from "../../images/logo-full.png";
 import { Link } from "react-router-dom";
 import {
   loadingToggleAction,
-  signupAction,
+  ForgotPasswordAction,
 } from '../../store/actions/AuthActions';
 
 const ForgotPassword = (props) => {
@@ -19,7 +19,7 @@ const ForgotPassword = (props) => {
     if(email === '') setEmailError(true);
     if (emailError) return;
     dispatch(loadingToggleAction(true));
-    dispatch(signupAction(email));
+    dispatch(ForgotPasswordAction(email));
   };
 
 
@@ -55,7 +55,7 @@ const ForgotPassword = (props) => {
                               placeholder='email'
                               onChange={(e) => setEmail(e.target.value)}
                             />
-                              {emailError && <div className="text-danger fs-12">Email is Required</div>}
+                              {emailError && <div className="text-danger fs-12 mt-1">Email is Required</div>}
                           </div>
                           <div className="text-center">
                             <input
@@ -73,7 +73,7 @@ const ForgotPassword = (props) => {
               </div> 
               : 
               <div>
-                  <h6 style={{fontSize:"25px"}} className="text-primary">An email has been sent to your registered email address with password recovery instructions</h6>
+                  <h6 style={{fontSize:"25px"}} className="text-primary">{props.successMessage}</h6>
               </div>
           }
         </div>

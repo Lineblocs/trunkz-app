@@ -27,7 +27,7 @@ export function AuthReducer(state = initialState, action) {
         return {
             ...state,
             errorMessage: '',
-            successMessage: 'Reset Password Successfully',
+            successMessage: action.payload,
             showLoading: false,
         };
     }
@@ -35,7 +35,7 @@ export function AuthReducer(state = initialState, action) {
         return {
             ...state,
             errorMessage: '',
-            successMessage: 'Email has been sent with password recovery instructions.',
+            successMessage: action.payload,
             showLoading: false,
         };
     }
@@ -44,7 +44,7 @@ export function AuthReducer(state = initialState, action) {
             ...state,
             auth: action.payload,
             errorMessage: '',
-            successMessage: 'Signup Successfully Completed',
+            successMessage: action.payload,
             showLoading: false,
         };
     }

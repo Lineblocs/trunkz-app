@@ -64,6 +64,16 @@ const ResetPassword = (props) => {
                         <h4 className="text-center mb-4 text-white">
                           Reset Password
                         </h4>
+                        {props.errorMessage && (
+                            <div className='bg-red-300 text-danger border text-center border-red-900 p-1 my-2'>
+                                {props.errorMessage}
+                            </div>
+                          )}
+                          {props.successMessage && (
+                              <div className='bg-green-300 text-success text-center text-green-900  p-1 my-2'>
+                                  {props.successMessage}
+                              </div>
+                          )}
                         <form onSubmit={(e) => onSubmit(e)}>
                           <div className="form-group">
                             <label className="text-white">
@@ -76,7 +86,7 @@ const ResetPassword = (props) => {
                               placeholder='email'
                               onChange={(e) => setEmail(e.target.value)}
                             />
-                               {errors.email && <div className="text-danger fs-12">{errors.email}</div>}
+                               {errors.email && <div className="text-danger fs-12 mt-1">{errors.email}</div>}
                           </div>
                           <div className='form-group'>
                             <label className='mb-1 text-white'>
@@ -88,7 +98,7 @@ const ResetPassword = (props) => {
                                     setPassword(e.target.value)
                                 }
                                 placeholder='password'/>
-                                   {errors.password && <div className="text-danger fs-12">{errors.password}</div>}
+                                   {errors.password && <div className="text-danger fs-12 mt-1">{errors.password}</div>}
                          </div>
                          <div className='form-group'>
                             <label className='mb-1 text-white'>
@@ -99,7 +109,7 @@ const ResetPassword = (props) => {
                                 onChange={(e) => setConfirmPassword(e.target.value)}
                                 placeholder='password'
                             />
-                            {errors.confirmPassword && <div className="text-danger fs-12">{errors.confirmPassword}</div>}
+                            {errors.confirmPassword && <div className="text-danger fs-12 mt-1">{errors.confirmPassword}</div>}
                          </div>
                           <div className="text-center" >
                             <input
