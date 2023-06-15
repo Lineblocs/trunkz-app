@@ -14,7 +14,7 @@ function Register(props) {
     const [password, setPassword] = useState('');
     let errorsObj = { email: '', password: '',firstName: '',lastName: '',phone:'' };
     const [errors, setErrors] = useState(errorsObj);
-    const [showOtp, setShowOtp] = useState(true)
+    const [showOtp] = useState(true)
     const dispatch = useDispatch();
 
     function onSignUp(e) {

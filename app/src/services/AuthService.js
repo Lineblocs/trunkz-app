@@ -7,7 +7,7 @@ import apiClient from '../apiClient';
 
 export function signUp(apiParam) {
     //axios call
-    const postData = apiParam;
+    // const postData = apiParam;
 
     // return apiClient.post(
     //     `/createUser`,
@@ -20,9 +20,9 @@ export function signUp(apiParam) {
 
 export function forgotPassword(email) {
     //axios call
-    const postData = {
-        email: email
-    };
+    // const postData = {
+    //     email: email
+    // };
 
     // return apiClient.post(
     //     `/forgotPassword`,
@@ -35,10 +35,10 @@ export function forgotPassword(email) {
 
 export function ResetPassword(email,password) {
     //axios call
-    const postData = {
-        email: email,
-        new_password: password
-    };
+    // const postData = {
+    //     email: email,
+    //     new_password: password
+    // };
 
     // return apiClient.post(
     //     `/resetPassword`,
