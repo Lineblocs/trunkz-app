@@ -5,6 +5,8 @@ import {
     LOGOUT_ACTION,
     SIGNUP_CONFIRMED_ACTION,
     SIGNUP_FAILED_ACTION,
+    FORGOT_PASSWORD_ACTION,
+    RESET_PASSWORD_ACTION
 } from '../actions/AuthActions';
 
 const initialState = {
@@ -21,12 +23,28 @@ const initialState = {
 };
 
 export function AuthReducer(state = initialState, action) {
+    if (action.type ===  RESET_PASSWORD_ACTION) {
+        return {
+            ...state,
+            errorMessage: '',
+            successMessage: action.payload,
+            showLoading: false,
+        };
+    }
+    if (action.type ===  FORGOT_PASSWORD_ACTION) {
+        return {
+            ...state,
+            errorMessage: '',
+            successMessage: action.payload,
+            showLoading: false,
+        };
+    }
     if (action.type === SIGNUP_CONFIRMED_ACTION) {
         return {
             ...state,
             auth: action.payload,
             errorMessage: '',
-            successMessage: 'Signup Successfully Completed',
+            successMessage: action.payload,
             showLoading: false,
         };
     }
@@ -76,5 +94,3 @@ export function AuthReducer(state = initialState, action) {
     }
     return state;
 }
-
-    

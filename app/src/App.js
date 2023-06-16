@@ -18,6 +18,8 @@ const Login = lazy(() => {
 		setTimeout(() => resolve(import('./jsx/pages/Login')), 500);
 	});
 });
+const ThankYou = lazy(() => import('./jsx/pages/ThankYou'));
+const ResetPassword = lazy(() => import('./jsx/pages/ResetPassword'));
 function App (props) {
     const dispatch = useDispatch();
     useEffect(() => {
@@ -29,6 +31,8 @@ function App (props) {
             <Route path='/login' component={Login} />
             <Route path='/page-register' component={SignUp} />
             <Route path='/page-forgot-password' component={ForgotPassword} />
+            <Route path='/page-reset-password' component={ResetPassword}/>
+            <Route path='/thankyou' component={ThankYou} />
         </Switch>
     );
     if (props.isAuthenticated) {

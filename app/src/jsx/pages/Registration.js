@@ -7,17 +7,36 @@ import {
     signupAction,
 } from '../../store/actions/AuthActions';
 function Register(props) {
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [phone, setPhone] = useState('')
     const [email, setEmail] = useState('');
-    let errorsObj = { email: '', password: '' };
-    const [errors, setErrors] = useState(errorsObj);
     const [password, setPassword] = useState('');
-
+    let errorsObj = { email: '', password: '',firstName: '',lastName: '',phone:'' };
+    const [errors, setErrors] = useState(errorsObj);
+    const [showOtp] = useState(true)
     const dispatch = useDispatch();
 
     function onSignUp(e) {
         e.preventDefault();
         let error = false;
         const errorObj = { ...errorsObj };
+
+        if (phone === '') {
+            errorObj.phone = 'Phone Number is Required';
+            error = true;
+        }
+
+        if (firstName === '') {
+            errorObj.firstName = 'First Name is Required';
+            error = true;
+        }
+
+        if (lastName === '') {
+            errorObj.lastName = 'Last Name is Required';
+            error = true;
+        }
+
         if (email === '') {
             errorObj.email = 'Email is Required';
             error = true;
@@ -31,9 +50,17 @@ function Register(props) {
         setErrors(errorObj);
 
         if (error) return;
+
+        const apiParam = {
+            first_name: firstName,
+            last_name: lastName,
+            password: password,
+            email: email,
+            phone_number: phone
+        }
         dispatch(loadingToggleAction(true));
 
-        dispatch(signupAction(email, password, props.history));
+        dispatch(signupAction(apiParam, props.history));
     }
   return (
     <div className='authincation h-100 p-meddle'>
@@ -47,7 +74,7 @@ function Register(props) {
                                     <div className='text-center mb-3'>
                                         <img src={logo} alt="" />
                                     </div>
-
+                                    {  showOtp ? <> 
                                     <h4 className='text-center mb-4 text-white'>Sign up your account</h4>
                                     {props.errorMessage && (
                                         <div className='bg-red-300 text-danger border border-red-900 p-1 my-2'>
@@ -55,16 +82,41 @@ function Register(props) {
                                         </div>
                                     )}
                                     {props.successMessage && (
-                                        <div className='bg-green-300 text-danger text-green-900  p-1 my-2'>
+                                        <div className='bg-green-300 text-success text-green-900  p-1 my-2'>
                                             {props.successMessage}
                                         </div>
                                     )}
                                     <form onSubmit={onSignUp}>
                                         <div className='form-group'>
                                             <label className='mb-1 text-white'>
-                                              <strong>Username</strong>
+                                              <strong>First Name</strong>
                                             </label>
-                                            <input type='text' className='form-control' placeholder='username' name='name' />
+                                            <input type='text' className='form-control' placeholder='First Name'  
+                                                 value={firstName}   
+                                                 onChange={(e) => setFirstName(e.target.value)} 
+                                            />
+                                             {errors.firstName && <div className="text-danger fs-12 mt-1">{errors.firstName}</div>}
+                                        </div>
+                                        <div className='form-group'>
+                                            <label className='mb-1 text-white'>
+                                              <strong>Last Name</strong>
+                                            </label>
+                                            <input type='text' className='form-control' placeholder='Last Name'  
+                                                 value={lastName}   
+                                                 onChange={(e) => setLastName(e.target.value)} 
+                                            />
+                                             {errors.lastName && <div className="text-danger fs-12 mt-1">{errors.lastName}</div>}
+                                        </div>
+                                       
+                                        <div className='form-group'>
+                                            <label className='mb-1 text-white'>
+                                              <strong>Phone Number</strong>
+                                            </label>
+                                            <input type='tel' className='form-control' placeholder='Phone Number'
+                                                value={phone}   
+                                                onChange={(e) => setPhone(e.target.value)} 
+                                            />
+                                            {errors.phone && <div className="text-danger fs-12 mt-1">{errors.phone}</div>}
                                         </div>
                                         <div className='form-group'>
                                             <label className='mb-1 text-white'>
@@ -75,7 +127,7 @@ function Register(props) {
 												placeholder='email'
                                                 onChange={(e) => setEmail(e.target.value)}
                                             />
-                                            {errors.email && <div className="text-danger fs-12">{errors.email}</div>}
+                                            {errors.email && <div className="text-danger fs-12 mt-1">{errors.email}</div>}
                                         </div>
                                         <div className='form-group'>
                                             <label className='mb-1 text-white'>
@@ -89,7 +141,7 @@ function Register(props) {
 												placeholder='password'
                                             />
                                         </div>
-                                        {errors.password && <div className="text-danger fs-12">{errors.password}</div>}
+                                        {errors.password && <div className="text-danger fs-12 mt-1">{errors.password}</div>}
                                         <div className='text-center mt-4'>
                                             <input type='submit' className='btn bg-white text-primary btn-block'/>
                                         </div>
@@ -102,6 +154,20 @@ function Register(props) {
                                             </Link>
                                         </p>
                                     </div>
+                                    </> : <>
+                                        <h2 className='text-center mb-3 text-white'>OTP Verification</h2>
+                                        <h6 className='text-center mb-4 text-white'>We've Sent a OTP Verification Code to Your Email</h6>
+                                        <form>
+                                            <div className='form-group'>
+                                                <input type='text' className="form-control"
+                                                    placeholder='Enter Verification Code'
+                                                />
+                                            </div>
+                                            <div className='text-center mt-4'>
+                                                <input type='submit' className='btn bg-white text-primary btn-block'/>
+                                            </div>
+                                        </form>
+                                    </>}
                                 </div>
                             </div>
                         </div>

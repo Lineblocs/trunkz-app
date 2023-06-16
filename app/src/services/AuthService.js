@@ -5,22 +5,48 @@ import {
 } from '../store/actions/AuthActions';
 import apiClient from '../apiClient';
 
-
-
-
-export function signUp(email, password) {
+export function signUp(apiParam) {
     //axios call
+    // const postData = apiParam;
 
-    const postData = {
-        email,
-        password,
-        returnSecureToken: true,
-    };
+    // return apiClient.post(
+    //     `/createUser`,
+    //     postData,
+    // );
+    return new Promise((resolve,reject) => {
+        resolve({message:"User Created Successfully"})
+    })
+}
 
-    return apiClient.post(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD3RPAp3nuETDn9OQimqn_YF6zdzqWITII`,
-        postData,
-    );
+export function forgotPassword(email) {
+    //axios call
+    // const postData = {
+    //     email: email
+    // };
+
+    // return apiClient.post(
+    //     `/forgotPassword`,
+    //     postData,
+    // );
+    return new Promise((resolve,reject)=>{
+        resolve({message:"An email has been sent to your registered email address with password recovery instructions"})
+    })
+}
+
+export function ResetPassword(email,password) {
+    //axios call
+    // const postData = {
+    //     email: email,
+    //     new_password: password
+    // };
+
+    // return apiClient.post(
+    //     `/resetPassword`,
+    //     postData,
+    // );
+    return new Promise((resolve,reject)=>{
+        resolve({message:"ResetPassword Successfully"})
+    })
 }
 
 export function login(email, password) {

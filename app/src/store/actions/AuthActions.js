@@ -1,9 +1,10 @@
 import {
     formatError,
     login,
-    runLogoutTimer,
     saveTokenInLocalStorage,
     signUp,
+    forgotPassword,
+    ResetPassword
 } from '../../services/AuthService';
 
 export const SIGNUP_CONFIRMED_ACTION = '[signup action] confirmed signup';
@@ -12,19 +13,21 @@ export const LOGIN_CONFIRMED_ACTION = '[login action] confirmed login';
 export const LOGIN_FAILED_ACTION = '[login action] failed login';
 export const LOADING_TOGGLE_ACTION = '[Loading action] toggle loading';
 export const LOGOUT_ACTION = '[Logout action] logout action';
+export const FORGOT_PASSWORD_ACTION = '[forgot action] forgot password action'
+export const RESET_PASSWORD_ACTION = '[reset action] reset password action'
 
-export function signupAction(email, password, history) {
+export function signupAction(apiParam, history) {
     return (dispatch) => {
-        signUp(email, password)
+        signUp(apiParam)
         .then((response) => {
-            saveTokenInLocalStorage(response.data);
-            runLogoutTimer(
-                dispatch,
-                response.data.expiresIn * 1000,
-                history,
-            );
-            dispatch(confirmedSignupAction(response.data));
-            history.push('/');
+            // saveTokenInLocalStorage(response.data);
+            // runLogoutTimer(
+            //     dispatch,
+            //     response.data.expiresIn * 1000,
+            //     history,
+            // );
+            dispatch(confirmedSignupAction(response.message));
+            history.push("/thankyou");
         })
         .catch((error) => {
             const errorMessage = formatError(error.response.data);
@@ -32,6 +35,25 @@ export function signupAction(email, password, history) {
         });
     };
 }
+export function ResetPasswordAction(email,password, history) {
+    return (dispatch) => {
+        ResetPassword(email,password)
+        .then((response) => {
+            dispatch(confirmedResetPasswordAction(response.message));
+            // history.push("/login");
+        })
+    };
+}
+
+export function ForgotPasswordAction(email){
+    return (dispatch) => {
+        forgotPassword(email)
+        .then((response) =>{
+            console.log(" => 'response action': ", response.message);
+            dispatch(confirmedPasswordAction(response.message));
+        })
+    }
+}   
 
 export function logout(history) {
     localStorage.removeItem('userDetails');
@@ -50,8 +72,8 @@ export function loginAction(email, password, history) {
                 var token = responseData.token;
                 saveTokenInLocalStorage(responseData);
                 //var authToken = token.auth;
-                var expireIn = token.expire_in_timestamp;
-                var user = response.data.user;
+                // var expireIn = token.expire_in_timestamp;
+                // var user = response.data.user;
                 /*
                 runLogoutTimer(
                     dispatch,
@@ -93,6 +115,19 @@ export function confirmedSignupAction(payload) {
         type: SIGNUP_CONFIRMED_ACTION,
         payload,
     };
+}
+export function confirmedResetPasswordAction(payload) {
+    return {
+        type: RESET_PASSWORD_ACTION,
+        payload,
+    };
+}
+
+export function confirmedPasswordAction(payload) {
+    return {
+        type: FORGOT_PASSWORD_ACTION,
+        payload
+    }
 }
 
 export function signupFailedAction(message) {
