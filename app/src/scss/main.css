@@ -16483,7 +16483,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
 [data-primary="color_3"] .profile-info h4.text-primary {
   color: #40189D !important; }
 [data-primary="color_3"] .profile-tab .nav-item .nav-link:hover, [data-primary="color_3"] .profile-tab .nav-item .nav-link.active {
-  border-bottom: 0.2px solid #40189D;
+  border-bottom: 3px solid #40189D;
   color: #40189D; }
 [data-primary="color_3"] .amChartsInputField {
   border: 0;
@@ -21524,7 +21524,7 @@ Fixing Order => Base + Typography >> General Layout + Grid >> Page Layout + Comp
     border: 0;
     background: transparent;
     background: transparent;
-    border-bottom: 0.2px solid #40189D;
+    border-bottom: 3px solid #40189D;
     color: #40189D; }
 
 .profile-info {

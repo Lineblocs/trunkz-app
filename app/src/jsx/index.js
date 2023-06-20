@@ -106,6 +106,10 @@ import Error500 from './pages/Error500'
 import Error503 from './pages/Error503'
 import Todo from './pages/Todo';
 
+// After Auth Pages
+import Interconnection from './pages/Interconnection/Interconnection'
+import DiDs from './pages/Dids/Dids'
+
 //Scroll To Top
 import ScrollToTop from './layouts/ScrollToTop';
 
@@ -118,6 +122,10 @@ const Markup = () => {
   const [activeEvent, setActiveEvent] = useState(!path)
 
   const routes = [
+    //After Auth
+    { url: 'interconnection', component: Interconnection },
+    { url: 'dids', component: DiDs },
+    
     /// Dashboard
     { url: '', component: Home },
     { url: 'dashboard', component: Home },
