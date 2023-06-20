@@ -68,17 +68,6 @@ class SideBar extends Component {
         "post-details",
         "ecom-product-detail",
       ],
-      email = ["email-compose", "email-inbox", "email-read"],
-      shop = [
-        "ecom-product-grid",
-        "ecom-product-list",
-        "ecom-product-list",
-        "ecom-product-order",
-        "ecom-checkout",
-        "ecom-invoice",
-        "ecom-customers",
-        "ecom-product-detail",
-      ],
       charts = [
         "chart-rechart",
         "chart-flot",

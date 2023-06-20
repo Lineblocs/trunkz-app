@@ -1,7 +1,6 @@
 import {
     formatError,
     login,
-    runLogoutTimer,
     saveTokenInLocalStorage,
     signUp,
     forgotPassword,
@@ -73,8 +72,8 @@ export function loginAction(email, password, history) {
                 var token = responseData.token;
                 saveTokenInLocalStorage(responseData);
                 //var authToken = token.auth;
-                var expireIn = token.expire_in_timestamp;
-                var user = response.data.user;
+                // var expireIn = token.expire_in_timestamp;
+                // var user = response.data.user;
                 /*
                 runLogoutTimer(
                     dispatch,

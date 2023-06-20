@@ -1,10 +1,9 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import { Link } from "react-router-dom";
 
 //** Import Image */
 import profileImg from "../../../../images/avatar/1.jpg";
 import { Dropdown } from "react-bootstrap";
-import { useEffect } from "react";
 
 //import ApexChart from "../../charts/apexcharts/ApexChart";
 import JobSlide from "./JobSlide";
@@ -22,6 +21,7 @@ const Home = () => {
       ApiServices.getRandomUser().then((data) => {
          dispatch(setData(data))
       })
+   // eslint-disable-next-line
    }, [])
    
    return (

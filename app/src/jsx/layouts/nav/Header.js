@@ -2,11 +2,9 @@ import React from "react";
 
 import { Link } from "react-router-dom";
 /// Scroll
-import PerfectScrollbar from "react-perfect-scrollbar";
 import LogoutPage from './Logout';
 /// Image
 import profile from "../../../images/profile/17.jpg";
-import avatar from "../../../images/avatar/1.jpg";
 
 const Header = ({ onNote, toggle, onProfile, onNotification }) => {
    var path = window.location.pathname.split("/");
